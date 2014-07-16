@@ -27,6 +27,46 @@
 			echo "selection_sort:";
 			print_r($arr);
 		}
+		function binary($arr, $key){
+	            $n = count($arr);
+	            $left=0;
+	            $right=count($arr);
+	            $mid=($left+$right)/2;
+	            while($left<$right && $arr[$mid]!=$key){
+	              
+	                if($key < $arr[$mid])
+	                    $right = $mid-1;
+	                else
+	                    $left = $mid+1;
+	                $mid=($left+$right)/2;
+	            }
+	            if($arr[$mid] == $key)
+	                echo $key;
+	            else
+	                echo "ERROR";;
+	        }
+		function recurbinary($arr, $key, $left, $right){
+			//Fatal error: Call to undefined function recurbinary()
+	            $mid = ($left+$right)/2;
+	            if($left > $right)
+	                return -1;
+	            if($arr[$mid] == $key){
+	                //echo "$key";
+	               // echo "<br />";
+	                return $key;
+	            }
+	                
+	
+	            else if($key > $arr[$mid]){
+	                 return recurbinary($arr, $key, $mid+1, $right);
+	            
+	            }
+	            else{
+	               return recurbinary($arr, $key, $left, $mid-1);
+	            }
+	                
+        }
+
 
 	}
 	$arr = array(10, 3, 6, 1, 0);
