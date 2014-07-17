@@ -65,8 +65,24 @@
 	               return recurbinary($arr, $key, $left, $mid-1);
 	            }
 	                
-        }
-
+        	}
+	      	function quicksort($arr, $left, $right){
+		        $key = $arr[$left];
+		        while ($left < $right) {
+		            # code...
+		            while($left < $right && $arr[$right]>$key){
+		                $right--;
+		            }
+		            $arr[$left] = $arr[$right];
+		            while($left<$right && $arr[left]<$key){
+		                $left++;
+		            }
+		            $arr[$right] = $arr[$left];
+	        }
+	        $arr[$left] = $key;
+	        return quicksort($arr, 0, $left-1);
+	        return quicksort($arr, $left+1, $right);
+    
 
 	}
 	$arr = array(10, 3, 6, 1, 0);
