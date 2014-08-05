@@ -78,13 +78,56 @@
 		                $left++;
 		            }
 		            $arr[$right] = $arr[$left];
-	        }
-	        $arr[$left] = $key;
-	        return quicksort($arr, 0, $left-1);
-	        return quicksort($arr, $left+1, $right);
-    
+	        	}
+		        $arr[$left] = $key;
+		        return quicksort($arr, 0, $left-1);
+		        return quicksort($arr, $left+1, $right);
+		}
+		
+		function deldir($directory){
+			if(file_exists($directory)){
+				if($dir_handle = opendir($directory)){
+					while($filename = readdir($dir_handle)){
+						if($filename!='.' && $filename!='..'){
+							$subfile = $directory."/".$filename;
+							if(is_dir($subfile))
+								dir($subfile);
+							if(is_file($subfile))
+								unlink($subfile);
+						}
+					}
+					closedir($dir_handle);
+					rmdir($directory);
+				}
+			}
+		}
+		
+		function dirSize($directory){
+			$size = 0;
+			if(file_exists($directory)){
+				if($dir_handle = opendir($directory)){
+					while($filename = readdir($dir_handle)){
 
-	}
+						if($filename != '.' && $filename !='..'){
+							echo "ok";
+							$subfile = $directory."/".$filename;
+							if(is_dir($subfile)){
+								$size += dirSize($subfile);
+							}
+							if(is_file($subfile)){
+								$size += filesize($filename);
+								
+							}
+						}
+					}
+					
+				}
+
+				
+			}
+			closedir($dir_handle);
+			return $size;
+		}
 	$arr = array(10, 3, 6, 1, 0);
 	$var = new test();
 	$var->selection_sort($arr);
